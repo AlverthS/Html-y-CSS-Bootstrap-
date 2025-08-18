@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>F1 Website · Versión Bootstrap</title>
+
+  <!-- Bootstrap CSS (CDN) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="bg-dark text-light">
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-black border-bottom border-danger-subtle shadow-sm sticky-top">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="#" onclick="showSection('home')">
+        <img src="https://i.redd.it/fpaiql2n7lb71.jpg" alt="Logo" class="rounded-circle object-fit-cover" style="width:40px;height:40px">
+        <span class="fw-bold">F1 Info</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div id="navMenu" class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('home')">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('estudiantes')">Pilotos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('administradores')">Ingenieros</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('acerca')">Acerca de</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero-flag py-5 py-lg-6 border-bottom border-danger-subtle">
+    <div class="container">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-7">
+          <h1 class="display-5 fw-bold text-uppercase title-font mb-3">Fórmula 1</h1>
+          <p class="lead text-light-emphasis mb-4">
+            Bienvenido a la web oficial de información sobre la Fórmula 1. Parte de la primera hoja de práctica
+            para el curso de <strong>Desarrollo Web</strong>.
+          </p>
+          <div class="d-flex gap-2">
+            <a class="btn btn-danger btn-lg px-4 rounded-3" href="#" onclick="showSection('estudiantes')">Ver Pilotos</a>
+            <a class="btn btn-outline-light btn-lg px-4 rounded-3" href="#" onclick="showSection('administradores')">Ver Ingenieros</a>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="card bg-black border border-danger-subtle shadow race-card">
+            <div class="card-body">
+              <h5 class="card-title"> Info Siguiente Carrera</h5>
+              <p class="card-text text-light-emphasis">Explora estadísticas y lo de nuestro interés</p>
+              <div class="d-flex align-items-center gap-3">
+                <div class="flag-square"></div>
+                <div>
+                  <div class="small text-secondary">Modo demo</div>
+                  <div class="fw-semibold">Gran Premio — Información estática</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="py-4 py-lg-5">
+    <div class="container">
+      <div id="content" class="min-vh-25"></div>
+    </div>
+  </main>
+
+  <footer class="py-4 border-top border-danger-subtle bg-black">
+    <div class="container d-flex flex-column flex-lg-row justify-content-between align-items-center gap-2">
+      <span class="small text-secondary">&copy; 2025 F1 Info (Demo Académica)</span>
+      <span class="small text-secondary">Hecho con Bootstrap 5 · Tema deportivo</span>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS (CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    function tableTemplate(headers, rows) {
+      const thead = '<thead class="table-dark"><tr>' + headers.map(h => `<th scope="col">${h}</th>`).join('') + '</tr></thead>';
+      const tbody = '<tbody>' + rows.map(r => '<tr>' + r.map(c => `<td>${c}</td>`).join('') + '</tr>').join('') + '</tbody>';
+      return `<div class="table-responsive"><table class="table table-striped table-hover align-middle mb-0">${thead}${tbody}</table></div>`;
+    }
+
+    function showSection(section) {
+      const content = document.getElementById('content');
+      if (section === 'home') {
+        content.innerHTML = `
+          <div class="row g-4">
+            <div class="col-lg-8">
+              <div class="card bg-black border border-danger-subtle shadow">
+                <div class="card-body">
+                  <h2 class="h4 mb-3">Página principal de carros de F1</h2>
+                  <p class="mb-0">Explora los pilotos, ingenieros y datos clave de la categoría reina del automovilismo.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="card bg-black border border-danger-subtle shadow">
+                <div class="card-body">
+                  <h3 class="h6 text-secondary mb-2">Tips</h3>
+                  <ul class="mb-0 small text-light-emphasis">
+                    <li>Usa el menú para navegar</li>
+                    <li>Tablas responsivas y estilos Bootstrap</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>`;
+      } else if (section === 'estudiantes') {
+        const headers = ["Nombre", "Nacionalidad", "Edad", "Estatura", "Escudería"];
+        const rows = [
+          ["Max Verstappen","Países Bajos","26","1.81 m","Red Bull"],
+          ["Lewis Hamilton","Reino Unido","39","1.74 m","Mercedes"],
+          ["Charles Leclerc","Mónaco","26","1.79 m","Ferrari"],
+          ["Lando Norris","Reino Unido","24","1.70 m","McLaren"],
+          ["Sergio Pérez","México","34","1.73 m","Red Bull"],
+        ];
+        content.innerHTML = `
+          <div class="card bg-black border border-danger-subtle shadow">
+            <div class="card-body">
+              <h2 class="h4 mb-3 d-flex align-items-center gap-2">
+                <span class="badge bg-danger rounded-pill">Pilotos</span> Listado de Estudiantes (Pilotos)
+              </h2>
+              ${tableTemplate(headers, rows)}
+            </div>
+          </div>`;
+      } else if (section === 'administradores') {
+        const headers = ["Nombre","Nacionalidad","Edad","Estatura","Escudería"];
+        const rows = [
+          ["Adrian Newey","Reino Unido","65","1.76 m","Red Bull"],
+          ["Mike Elliott","Reino Unido","48","1.75 m","Mercedes"],
+          ["Enrico Cardile","Italia","50","1.72 m","Ferrari"],
+          ["Peter Prodromou","Chipre","54","1.80 m","McLaren"],
+          ["David Sánchez","Francia","51","1.78 m","Ferrari/McLaren"],
+        ];
+        content.innerHTML = `
+          <div class="card bg-black border border-danger-subtle shadow">
+            <div class="card-body">
+              <h2 class="h4 mb-3 d-flex align-items-center gap-2">
+                <span class="badge bg-danger rounded-pill">Ingenieros</span> Administradores (Ingenieros Principales)
+              </h2>
+              ${tableTemplate(headers, rows)}
+            </div>
+          </div>`;
+      } else if (section === 'acerca') {
+        content.innerHTML = `
+          <div class="card bg-black border border-danger-subtle shadow">
+            <div class="card-body">
+              <h2 class="h4 mb-3">Mis Datos</h2>
+              <ul class="list-group list-group-flush bg-black">
+                <li class="list-group-item bg-black text-light d-flex justify-content-between">
+                  <strong>Nombre</strong> <span>Albert Castañeda</span>
+                </li>
+                <li class="list-group-item bg-black text-light d-flex justify-content-between">
+                  <strong>Carnet</strong> <span>090-18-20081</span>
+                </li>
+              </ul>
+            </div>
+          </div>`;
+      }
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+
+    // Load home at start
+    document.addEventListener('DOMContentLoaded', () => showSection('home'));
+  </script>
+</body>
+</html>
